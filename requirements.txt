@@ -1,0 +1,6 @@
+jupyter
+jupyterlab
+qiskit
+matplotlib
+numpy
+pylatexenc
