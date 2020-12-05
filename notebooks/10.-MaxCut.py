@@ -14,8 +14,6 @@ print(model)
 print()
 
 # We can solve it exactly
-
-
 from dimod.reference.samplers import ExactSolver
 sampler = ExactSolver()
 solution = sampler.sample(model)
@@ -25,21 +23,21 @@ print()
 
 
 # Or with *simulated annealing* (a heuristic method used in classical computers)
-
-
 sampler = dimod.SimulatedAnnealingSampler()
 response = sampler.sample(model, num_reads=10)
 print("The solution with simulated annealing is")
 print(response)
 print()
 
+# D-Wave's API key
+API_TOKEN = ''
+config = {'token': API_TOKEN}
 
-# And, of course, with D-Wave's quantum computer 
 
-
+# And, of course, with D-Wave's quantum computer
 from dwave.system.samplers import DWaveSampler
 from dwave.system.composites import EmbeddingComposite
-sampler = EmbeddingComposite(DWaveSampler())
+sampler = EmbeddingComposite(DWaveSampler(**config))
 sampler_name = sampler.properties['child_properties']['chip_id']
 response = sampler.sample(model, num_reads=5000)
 print("The solution obtained by D-Wave's quantum annealer",sampler_name,"is")
@@ -81,10 +79,9 @@ print()
 
 # Finally, we use the *quantum annealer* again
 
-sampler = EmbeddingComposite(DWaveSampler(solver='Advantage_system1.1'))
+sampler = EmbeddingComposite(DWaveSampler(solver='Advantage_system1.1', **config))
 sampler_name = sampler.properties['child_properties']['chip_id']
 response = sampler.sample(model, num_reads=5000)
 print("The solution obtained by D-Wave's quantum annealer",sampler_name,"is")
 print(response)
 print()
-
