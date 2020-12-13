@@ -7,3 +7,4 @@ pylatexenc
 dimos
 dwave-system
 pyscf
+qiskit-aqua[cvx]
